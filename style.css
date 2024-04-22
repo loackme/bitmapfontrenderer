@@ -1,0 +1,46 @@
+@font-face {
+  font-family: 'MEK Mono';
+  unicode-range: U+000-5FF; /* Download only latin glyphs */
+  src: url('./fonts/Minimal5x7.ttf') format('ttf');
+}
+
+body {
+  margin: 0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  width: 80vmin;
+  height: 80 vmin;
+  font-smooth: never;
+    -webkit-font-smoothing : none;
+}
+
+#overlay {
+	display: flex;
+	font-family: monospace;
+	font-size: 2em;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 15vmin;
+}
+
+#overlay p {
+	max-width: 800px;
+}
+
+.no-cursor {
+	cursor: none;
+}
