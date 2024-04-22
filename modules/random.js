@@ -1,5 +1,5 @@
 // (c) loackme <loic@loack.me>; MIT License (MIT)
-// v 1.1 09-02-2024
+// v 1.2 22-04-2024
 
 export class Random {
   constructor(r=Math.random){

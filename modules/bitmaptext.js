@@ -1,3 +1,6 @@
+// Generate BMfont file here: https://snowb.org/
+// select .xml (BMFont XML) export
+
 class Font {
     constructor(img,xml) {
         this.img = img
@@ -13,7 +16,7 @@ class Font {
     }
 
     static async load(src) {
-        let img, data
+        let img
         await new Promise( (resolve, reject) => {
             img = new Image();
             img.src = `${src}.png`;
