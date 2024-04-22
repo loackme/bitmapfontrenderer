@@ -6,7 +6,7 @@ import { Font, Text } from "./modules/bitmaptext.js"
 const W = 512
 const C = createCanvas2D(W,W)
 const R = new Random()
-const font = await Font.load('./fonts/test3')
+const font = await Font.load('./fonts/MEKSans') // should include both *.xml and *.png
 
 function setup() {
   document.body.appendChild(C.canvas)
