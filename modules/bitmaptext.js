@@ -5,6 +5,7 @@ class Font {
     constructor(img,xml) {
         this.img = img
         this.common = nodeAttributesToObject(xml.querySelector('common'))
+        this.common.spacing = 0
         this.info = nodeAttributesToObject(xml.querySelector('info'))
         this.chars = {}
         let char_ = xml.querySelectorAll('char')
@@ -36,6 +37,10 @@ class Font {
 
         return new Font(img,xml);
     }
+
+    setSpacing(spacing){
+        this.common.spacing = spacing
+    }
 }
 
 class Text {
@@ -56,12 +61,11 @@ class Text {
     }
 
     renderText(text, font, color){
-        this.spacing = -1;
         const textArray = text.split('')
 
         const height = font.common.lineHeight
         const width = textArray
-            .map( ch => parseInt(font.chars[ch].xadvance) + this.spacing )
+            .map( ch => font.chars[ch].xadvance + font.common.spacing )
             .reduce((partialSum, a) => partialSum + a, 0)
 
         const buffer = document.createElement('canvas');
@@ -71,10 +75,10 @@ class Text {
         let currentX = 0;
         textArray.forEach( ch => {
             let char = font.chars[ch]
-            let x = currentX + parseInt(char.xoffset),
-                y = parseInt(char.yoffset)
+            let x = currentX + char.xoffset,
+                y = char.yoffset
             bufferCtx.drawImage(font.img,char.x,char.y,char.width,char.height,x,y,char.width,char.height)
-            currentX += parseInt(char.xadvance) + this.spacing
+            currentX += char.xadvance + font.common.spacing
         })
         bufferCtx.fillStyle = color;
 		bufferCtx.globalCompositeOperation = "source-in";
@@ -88,7 +92,8 @@ function nodeAttributesToObject(node){
     const names = node.getAttributeNames()
     const obj = {}
     names.forEach( (name) => {
-        obj[name] = node.getAttribute(name)
+        const val = node.getAttribute(name)
+        obj[name] = isNaN(Number(val)) ? val : Number(val)
     })
     return obj
 }
