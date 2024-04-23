@@ -20,7 +20,7 @@ class Font {
         let img
         await new Promise( (resolve, reject) => {
             img = new Image();
-            img.src = `${src}.png`;
+            img.src = `${src}.png`
             img.addEventListener('load', function() {
                 resolve(true);
             })
@@ -30,12 +30,12 @@ class Font {
         await fetch(`${src}.xml`)
         .then(response => response.text())
         .then(data => {
-            const parser = new DOMParser();
-            xml = parser.parseFromString(data, "application/xml");
+            const parser = new DOMParser()
+            xml = parser.parseFromString(data, "application/xml")
         })
-        .catch(console.error);
+        .catch(console.error)
 
-        return new Font(img,xml);
+        return new Font(img,xml)
     }
 
     setSpacing(spacing){

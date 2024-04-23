@@ -15,10 +15,10 @@ function setup() {
 }
 
 function draw() {
-  C.ctx.fillStyle = "#fff";
-  C.ctx.fillRect(0,0,W,H);
+  C.ctx.fillStyle = "#fff"
+  C.ctx.fillRect(0,0,W,H)
 
-  const N = 20;
+  const N = 20
 
   for (let n = 0; n < N; n++){
     let color = R.randomPick(['#000','#f00','#0f0','#00f'],[1,1,1,1])
