@@ -21,7 +21,7 @@ function draw() {
   const N = 20
 
   for (let n = 0; n < N; n++){
-    let color = R.randomPick(['#000','#f00','#0f0','#00f'],[1,1,1,1])
+    let color = R.randomPick(['#000','#f00','#0f0','#00f'])
     let str = R.randomPick(['YES','NO','yes','no'])
     let x = R.randomUniform(0,W),
         y = R.randomUniform(0,H),
