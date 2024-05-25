@@ -11,8 +11,8 @@ body {
 }
 
 canvas {
-  width: 80vmin;
-  height: 80vmin;
+  max-width: 80vmin;
+  max-height: 80vmin;
   object-fit: contain;
   image-rendering: pixelated;
 }

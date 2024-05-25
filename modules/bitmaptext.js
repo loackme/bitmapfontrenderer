@@ -1,6 +1,8 @@
 // Generate BMfont file here: https://snowb.org/
 // select .xml (BMFont XML) export
 
+import { createCanvas2D, noSmooth } from "./canvas.js"
+
 class Font {
     constructor(img,xml) {
         this.img = img
@@ -55,7 +57,7 @@ class Text {
         ctx.save()
         ctx.translate(x,y)
         ctx.scale(sc,sc)
-        ctx.translate(-this.width/2|0,-this.height/2|0)
+        ctx.translate(-(this.width/2|0),-(this.height/2|0))
         ctx.drawImage(this.buffer,0,0,this.width,this.height,0,0,this.width,this.height)
         ctx.restore()
     }
@@ -68,23 +70,22 @@ class Text {
             .map( ch => font.chars[ch].xadvance + font.common.spacing )
             .reduce((partialSum, a) => partialSum + a, 0)
 
-        const buffer = document.createElement('canvas');
-        const bufferCtx = buffer.getContext('2d')
-        buffer.width = width, buffer.height = height
+        const buffer = createCanvas2D(width,height)
+        noSmooth(buffer.ctx)
 
         let currentX = 0;
         textArray.forEach( ch => {
             let char = font.chars[ch]
             let x = currentX + char.xoffset,
                 y = char.yoffset
-            bufferCtx.drawImage(font.img,char.x,char.y,char.width,char.height,x,y,char.width,char.height)
+            buffer.ctx.drawImage(font.img,char.x,char.y,char.width,char.height,x,y,char.width,char.height)
             currentX += char.xadvance + font.common.spacing
         })
-        bufferCtx.fillStyle = color;
-		bufferCtx.globalCompositeOperation = "source-in";
-		bufferCtx.fillRect(0,0,width,height);
+        buffer.ctx.fillStyle = color;
+		buffer.ctx.globalCompositeOperation = "source-in";
+		buffer.ctx.fillRect(0,0,width,height);
 
-        return {buffer, width, height}
+        return {buffer: buffer.canvas, width, height}
     }
 }
 
